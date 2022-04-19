@@ -1,0 +1,22 @@
+.form {
+  width: 100%;
+}
+
+.sum-input {
+  width: 9em;
+}
+
+.mult-input__wrapper {
+  display: flex;
+  padding-left: 34px;
+}
+
+.mult-input {
+  width: 2em;
+}
+
+.mult-input-sum {
+  width: 7em;
+  padding: 3px;
+  color: #909294;
+}
