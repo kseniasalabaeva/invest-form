@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/invest-form/static/css/main.c9b6f19a.css",
+    "main.js": "/invest-form/static/js/main.18c93fef.js",
+    "static/js/787.823d7897.chunk.js": "/invest-form/static/js/787.823d7897.chunk.js",
+    "static/media/cross.svg": "/invest-form/static/media/cross.0fcba255cbea2d59899db9e6d2ee6746.svg",
+    "index.html": "/invest-form/index.html",
+    "static/media/arrow.svg": "/invest-form/static/media/arrow.9375aaad96b9e33c488a071e503bf62f.svg",
+    "static/media/button-arrow.svg": "/invest-form/static/media/button-arrow.e8ee96f259aa45d00ce05dd77c8bc3c2.svg",
+    "main.c9b6f19a.css.map": "/invest-form/static/css/main.c9b6f19a.css.map",
+    "main.18c93fef.js.map": "/invest-form/static/js/main.18c93fef.js.map",
+    "787.823d7897.chunk.js.map": "/invest-form/static/js/787.823d7897.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9b6f19a.css",
+    "static/js/main.18c93fef.js"
+  ]
+}
