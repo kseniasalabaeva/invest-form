@@ -1,22 +1,18 @@
-import { ClassNames } from '@emotion/react';
-import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { ReactComponent as CrossIcon } from '../../assets/cross.svg';
+import { ICustomInput } from '../../utils/types';
 import "./style.scss";
 
-type ICustomInput = {
-  type?: string,
-  value?: number,
-  name: string,
-  className?: string,
-  defaultValue?: number,
-  readOnly?: boolean,
-  required?: boolean,
-  pattern?: RegExp,
-}
-
-export const CustomInput: React.FC<ICustomInput> = ({ type, name, className, defaultValue, readOnly, required, pattern }) => {
-  const { register, setValue, watch } = useFormContext();
+export const CustomInput: React.FC<ICustomInput> = ({ 
+  type,
+  min,
+  max,
+  name,
+  className,
+  defaultValue,
+  readOnly,
+  errors
+}) => {
+  const { register } = useFormContext();
 
   return (
     <>
@@ -25,16 +21,22 @@ export const CustomInput: React.FC<ICustomInput> = ({ type, name, className, def
           <input
             {...register(name, {
               valueAsNumber: true,
-              required: required,
-              pattern: pattern
             })}
-            className='input'
+            className="input"
+            style={ errors ? {border: '1px solid rgb(177, 0, 0)'} : {}}
             type={type}
             autoComplete="off"
             defaultValue={defaultValue}
             readOnly={readOnly}
+            min={min}
+            max={max}
           />
+          { errors &&
+          <div className='error'>
+            <span className='error-message'>{errors.message}</span>
+          </div>
+          }
       </div>
     </>
   )
-}
+};

@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ReactComponent as CrossIcon } from '../../assets/cross.svg';
-import { useOnClickOutside } from '../../hooks/useClickOutside';
+import { useOnClickOutside } from '../../utils/hooks/useClickOutside';
+import { IMultInput } from '../../utils/types';
 import "./style.scss";
 
-type IMultInput = {
-  min: number,
-  max: number,
-  defaultValue: number,
-}
-
-export const MultInput: React.FC<IMultInput> = ({ min, max, defaultValue }) => {
+export const MultInput: React.FC<IMultInput> = ({ min, max, defaultValue, errors }) => {
   const ref = useRef();
   const { register, setValue, watch } = useFormContext();
   const [isPopupOpen, setisPopupOpen] = useState<boolean>(false)
@@ -31,14 +26,19 @@ export const MultInput: React.FC<IMultInput> = ({ min, max, defaultValue }) => {
         <input
           {...register('mult', {
             valueAsNumber: true,
-            required: true
           })}
           type="number"
           defaultValue={defaultValue}
           className="mult__input"
           autoComplete='off'
+          style={ errors ? {border: '1px solid rgb(177, 0, 0)'} : {}}
           onClick={() => setisPopupOpen(true)}
         />
+        { errors &&
+          <div className='error'>
+            <span className='error-message'>{errors.message}</span>
+          </div>
+        }
       </div>
       { isPopupOpen && (
         <div ref={ref as any} className="popup__wrapper">

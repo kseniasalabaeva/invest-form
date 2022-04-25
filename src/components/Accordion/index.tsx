@@ -1,12 +1,8 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
+import { IAccordion } from "../../utils/types";
 import "./style.scss";
-
-type IAccordion = {
-  title?: string;
-  children: any;
-}
 
 export const Accordion: React.FC<IAccordion> = ({title, children}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,16 +22,4 @@ export const Accordion: React.FC<IAccordion> = ({title, children}) => {
       </div>
   </div>
   );
-}
-
-const AccordionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  transition: 0.4s;
-`
-const TitleWrapper = styled.div`
-  display: flex;
-`
-const ContentWrapper = styled.div`
-  
-`
+};

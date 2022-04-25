@@ -88,3 +88,20 @@
 .scale__item {
   color: $base;
 }
+
+.error {
+  display: flex;
+  color: white;
+  position: absolute;
+  background-color: #e64545;
+  bottom: 27px;
+  width: 126px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.error-message {
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+}

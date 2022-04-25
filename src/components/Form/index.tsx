@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import styled from "@emotion/styled";
-import { ReactComponent as ButtonArrow } from '../../assets/button-arrow.svg';
+import { yupResolver } from "@hookform/resolvers/yup"
+import { schema } from "../../utils/validation";
 import { Accordion } from "../Accordion";
-import "./style.scss";
 import { MultInput } from "../MultInput";
 import { CustomInput } from "../CustomInput";
+import { ReactComponent as ButtonArrow } from '../../assets/button-arrow.svg';
+import "./style.scss";
 
 export const Form = () => {
-  const formMethods = useForm();
-  const { handleSubmit, watch, setValue } = formMethods;
+  const formMethods: any = useForm( { resolver: yupResolver(schema) });
+  const { handleSubmit, watch, setValue, formState: { errors } } = formMethods;
 
   const [direction, setDirection] = useState<string>('')
   const [isPercent, setIsPercent] = useState<boolean>(false);
@@ -20,15 +22,24 @@ export const Form = () => {
 
   const sumValue = watch('sumInv');
   const multValue = watch('mult');
-  const takeProfit = watch('takeProfit');
-  const stopLoss = watch('stopLoss');
 
-  const valueForLimits = sumValue / 100 * 30;
+  const valueForLimits = Math.ceil(sumValue / 100 * 30);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    Object.keys(data).forEach(key => data[key] === undefined ? delete data[key] : '');
     data.direction = direction;
     delete data.rangeValue;
     console.log('data', data);
+    fetch('/', {
+      method: 'POST',
+      body: JSON.stringify({
+        sumInv: data.sumInv,
+        mult: data.mult,
+        takeProfit: data.takeProfit,
+        stopLoss: data.stopLoss,
+        direction,
+      }),
+    });
   };
 
   useEffect(() => {
@@ -36,13 +47,12 @@ export const Form = () => {
       setMultiplierSum(sumValue * multValue);
     } else {
       setMultiplierSum(0);
-    }
+    };
   },[sumValue, multValue]);
 
   useEffect(() => {
     setValue('takeProfit', isProfit ? valueForLimits : undefined);
     setValue('stopLoss', isLoss ? valueForLimits : undefined);
-    // console.log('takeProfit', takeProfit, 'stopLoss', stopLoss)
   },[isProfit, isLoss, sumValue]);
 
   return (
@@ -55,12 +65,20 @@ export const Form = () => {
             <BlockContainer>
               <InputWrapper>
                 <span>Сумма инвестиции</span>
-                <CustomInput type="number" className="sum__input" name="sumInv" defaultValue={5000}/>
+                <CustomInput 
+                  type="number"
+                  className="sum__input"
+                  name="sumInv"
+                  min={0}
+                  max={200000}
+                  defaultValue={5000}
+                  errors={errors.sumInv}
+                />
               </InputWrapper>
               <InputWrapper>
                 <span>Мультипликатор</span>
                 <div className="mult-input__container">
-                  <MultInput defaultValue={40} min={1} max={40}/>
+                  <MultInput defaultValue={40} min={1} max={40} errors={errors.mult}/>
                   <span className="mult-sum"> = $ {multiplierSum}</span>
                 </div>
               </InputWrapper>
@@ -77,7 +95,7 @@ export const Form = () => {
                           name="limit"
                           value="percent"
                           className="radio-button"
-                          onChange={(event) => {
+                          onChange={() => {
                             setIsPercent(true)
                             setIsUSD(false)
                           }}
@@ -117,6 +135,7 @@ export const Form = () => {
                       name="takeProfit" 
                       type="number"
                       readOnly={!isProfit}
+                      errors={errors.takeProfit}
                       />
                   </InputWrapper>
                   <InputWrapper>
@@ -135,6 +154,7 @@ export const Form = () => {
                       name="stopLoss" 
                       type="number" 
                       readOnly={!isLoss}
+                      errors={errors.stopLoss}
                   />
                   </InputWrapper>
                 </BlockContainer>
