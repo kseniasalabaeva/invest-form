@@ -1,0 +1,38 @@
+@import '../../_variables.scss';
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion:nth-of-type(1) {
+  border-top-width: 1px
+}
+
+.accordion-title {
+  display: flex;
+  color: $base;
+}
+
+.accordion-title:hover {
+  cursor: pointer;
+}
+
+.arrow {
+  transition: all 0.35s ease;
+}
+
+.arrow[aria-expanded="true"] {
+  transform: rotateZ(90deg);
+}
+
+.accordion-content {
+  overflow: hidden;
+  max-height: 1000px;
+  transition: max-height 1s ease-in-out;
+}
+
+.accordion-content[aria-expanded="true"] {
+  max-height: 0px;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}

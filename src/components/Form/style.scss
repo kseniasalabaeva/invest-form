@@ -1,0 +1,113 @@
+@import '../../_variables.scss';
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  width: 316px;
+  height: 368px;
+  background-color: white;
+}
+
+.form__wrapper {
+  display: flex;
+  height: 316px;
+}
+
+.form {
+  width: 100%;
+}
+
+.mult-input__container {
+  display: flex;
+
+  .mult-sum {
+    width: 5.4em;
+    padding: 5px;
+    color: $base;
+    overflow-wrap: break-word;
+  }
+}
+
+.sum__input input::-webkit-outer-spin-button,
+.sum__input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.radio-buttons__container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5em;
+  width: 200px;
+}
+.radio-buttons__wrapper {
+  display: flex;
+}
+
+.radio-button {
+  margin: 5px 0;
+}
+
+.checkbox__wrapper {
+  display: flex;
+}
+
+.checkbox__item {
+  margin: 5px 5px 5px 0;
+}
+
+.limit-input {
+  max-width: 9em;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 128px;
+  height: 44px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  :nth-child(1) {
+    flex: 1;
+  }
+
+  :nth-child(2) {
+    flex: 3;
+  }
+
+  &.growth {
+    background-color: $growth;
+  }
+  
+  &.reduction {
+    background-color: $reduction;
+  }
+}
+.arrow__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-radius: 5px;
+
+  &.growth {
+    background-color: rgb(44 111 30 / 52%);
+  }
+  &.reduction {
+    background-color: rgb(217 93 93);
+  }
+
+  .arrow-growth {
+    transform: rotate(180deg);
+  }
+}
+
+.submit-button__title {
+  color: white;
+  font-weight: 700;
+}

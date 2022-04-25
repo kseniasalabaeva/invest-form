@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
-import "./style.css";
+import "./style.scss";
 
 type IAccordion = {
   title?: string;
@@ -16,26 +16,26 @@ export const Accordion: React.FC<IAccordion> = ({title, children}) => {
   }
 
   return (
-  <AccordionContainer>
-    <TitleWrapper onClick={handleAccordion}>
-      <Arrow className={isOpen ? "rotated-arrow" : ""} />
-      <div>{title}</div>
-    </TitleWrapper>
-    {isOpen && (
-      <ContentWrapper>
+  <div className="accordion">
+    <div className="accordion-title" onClick={handleAccordion}>
+      <Arrow className="arrow" aria-expanded={isOpen}/>
+      <span className="title">{title}</span>
+    </div>
+      <div className="accordion-content" aria-expanded={!isOpen}>
         {children}
-      </ContentWrapper>
-    )}
-  </AccordionContainer>
+      </div>
+  </div>
   );
 }
 
 const AccordionContainer = styled.div`
-  
+  display: flex;
+  flex-direction: column;
+  transition: 0.4s;
 `
 const TitleWrapper = styled.div`
-  
+  display: flex;
 `
 const ContentWrapper = styled.div`
-    
+  
 `

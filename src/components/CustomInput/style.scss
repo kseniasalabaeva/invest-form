@@ -1,0 +1,18 @@
+@import '../../_variables.scss';
+
+.input__wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  color: $base;
+}
+
+.input {
+  width: 120px;
+  height: 19px;
+  text-align: end;
+  border-radius: 3px;
+  border: 1px solid $base;
+}
